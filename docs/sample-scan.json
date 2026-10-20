@@ -1,0 +1,183 @@
+{
+  "target": "192.168.1.0/24 (sample office network)",
+  "scanned_addresses": 254,
+  "started": "2026-10-20 09:15:02",
+  "duration_s": 19.6,
+  "scanner_host": "IT-LAPTOP",
+  "scanner_ip": "192.168.1.50",
+  "platform": "Windows-11",
+  "devices": [
+    {
+      "ip": "192.168.1.1",
+      "hostname": "gateway.local",
+      "mac": "aa:bb:cc:00:00:01",
+      "macs": [
+        "aa:bb:cc:00:00:01"
+      ],
+      "vendor": "",
+      "open_ports": [
+        53,
+        80,
+        443
+      ],
+      "services": {
+        "53": "dns",
+        "80": "http",
+        "443": "https"
+      },
+      "banners": {
+        "80": "HTTP/1.0 302 Found | router"
+      },
+      "is_this_computer": false,
+      "found_by": "probe"
+    },
+    {
+      "ip": "192.168.1.10",
+      "hostname": "RECEPTION-PC",
+      "mac": "aa:bb:cc:00:00:0a",
+      "macs": [
+        "aa:bb:cc:00:00:0a"
+      ],
+      "vendor": "",
+      "open_ports": [
+        135,
+        139,
+        445,
+        3389
+      ],
+      "services": {
+        "135": "msrpc",
+        "139": "netbios",
+        "445": "smb",
+        "3389": "rdp"
+      },
+      "banners": {},
+      "is_this_computer": false,
+      "found_by": "probe"
+    },
+    {
+      "ip": "192.168.1.20",
+      "hostname": "",
+      "mac": "aa:bb:cc:00:00:14",
+      "macs": [
+        "aa:bb:cc:00:00:14"
+      ],
+      "vendor": "",
+      "open_ports": [
+        80,
+        515,
+        631,
+        9100
+      ],
+      "services": {
+        "80": "http",
+        "515": "lpd",
+        "631": "ipp",
+        "9100": "jetdirect"
+      },
+      "banners": {
+        "80": "HTTP/1.1 200 OK | HP LaserJet"
+      },
+      "is_this_computer": false,
+      "found_by": "probe"
+    },
+    {
+      "ip": "192.168.1.30",
+      "hostname": "",
+      "mac": "aa:bb:cc:00:00:1e",
+      "macs": [
+        "aa:bb:cc:00:00:1e"
+      ],
+      "vendor": "",
+      "open_ports": [
+        80,
+        554
+      ],
+      "services": {
+        "80": "http",
+        "554": "rtsp"
+      },
+      "banners": {
+        "80": "HTTP/1.1 200 OK | Hikvision-Webs"
+      },
+      "is_this_computer": false,
+      "found_by": "probe"
+    },
+    {
+      "ip": "192.168.1.35",
+      "hostname": "",
+      "mac": "aa:bb:cc:00:00:23",
+      "macs": [
+        "aa:bb:cc:00:00:23"
+      ],
+      "vendor": "",
+      "open_ports": [
+        21,
+        23,
+        80
+      ],
+      "services": {
+        "21": "ftp",
+        "23": "telnet",
+        "80": "http"
+      },
+      "banners": {
+        "21": "220 FTP server ready",
+        "23": "login:"
+      },
+      "is_this_computer": false,
+      "found_by": "probe"
+    },
+    {
+      "ip": "192.168.1.40",
+      "hostname": "pos-server",
+      "mac": "aa:bb:cc:00:00:40",
+      "macs": [
+        "aa:bb:cc:00:00:40",
+        "aa:bb:cc:00:00:41"
+      ],
+      "vendor": "",
+      "open_ports": [
+        3306,
+        8080
+      ],
+      "services": {
+        "3306": "mysql",
+        "8080": "http-proxy"
+      },
+      "banners": {
+        "8080": "HTTP/1.1 200 OK | Apache"
+      },
+      "is_this_computer": false,
+      "found_by": "probe"
+    },
+    {
+      "ip": "192.168.1.50",
+      "hostname": "IT-LAPTOP",
+      "mac": "aa:bb:cc:00:00:32",
+      "macs": [
+        "aa:bb:cc:00:00:32"
+      ],
+      "vendor": "",
+      "open_ports": [],
+      "services": {},
+      "banners": {},
+      "is_this_computer": true,
+      "found_by": "probe"
+    },
+    {
+      "ip": "192.168.1.70",
+      "hostname": "omars-iphone",
+      "mac": "aa:bb:cc:00:00:46",
+      "macs": [
+        "aa:bb:cc:00:00:46"
+      ],
+      "vendor": "",
+      "open_ports": [],
+      "services": {},
+      "banners": {},
+      "is_this_computer": false,
+      "found_by": "probe"
+    }
+  ]
+}

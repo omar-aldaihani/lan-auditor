@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAN Audit - 192.168.1.0/24 (sample office network)</title>
+<style>
+:root { --bg:#f4f6f9; --card:#fff; --text:#17202a; --muted:#64707d; --line:#e2e7ee; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f141a; --card:#18202a; --text:#e6edf3; --muted:#9aa7b5; --line:#2b3644; } }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px 16px 48px; background:var(--bg); color:var(--text);
+       font:15px/1.5 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+main { max-width:1080px; margin:0 auto; }
+h1 { margin:0; font-size:26px; } h2 { font-size:18px; margin:28px 0 10px; }
+.muted { color:var(--muted); font-size:13px; } .mono { font-family:Consolas, monospace; }
+.top { display:flex; flex-wrap:wrap; gap:14px; margin:18px 0; }
+.tile { flex:1 1 160px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+.tile .big { font-size:30px; font-weight:700; }
+.tile ul { margin:4px 0 0; padding-left:18px; }
+.table-wrap { overflow-x:auto; background:var(--card); border:1px solid var(--line); border-radius:10px; }
+table { width:100%; border-collapse:collapse; min-width:720px; }
+th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { font-size:12px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); }
+tr:last-child td { border-bottom:0; }
+.port { display:inline-block; margin:0 4px 4px 0; padding:1px 7px; border-radius:6px;
+         border:1px solid var(--line); font-family:Consolas, monospace; font-size:13px; }
+.port small { color:var(--muted); margin-left:4px; font-family:inherit; }
+.sev { display:inline-block; color:#fff; border-radius:5px; padding:0 7px; font-size:12px;
+        font-weight:700; text-transform:uppercase; }
+.ok { color:#2e7d32; font-weight:700; } .me { font-size:11px; background:#2f6fb5; color:#fff; border-radius:5px; padding:0 6px; }
+.finding { background:var(--card); border:1px solid var(--line); border-left:5px solid; border-radius:8px;
+            padding:10px 14px; margin-bottom:10px; }
+.finding p { margin:6px 0 0; }
+.ok-box { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px; }
+footer { margin-top:30px; color:var(--muted); font-size:12px; }
+</style></head><body><main>
+<h1>Network security audit</h1>
+<div class="muted">Network <b>192.168.1.0/24 (sample office network)</b> · scanned 2026-10-20 09:15:02 from 192.168.1.50 · 254 addresses in 19.6s</div>
+
+<div class="top">
+  <div class="tile"><div class="muted">Security score</div><div class="big" style="color:#c62828">33<small>/100</small></div><div>Grade <b>F</b></div></div>
+  <div class="tile"><div class="muted">Devices found</div><div class="big">8</div><ul><li><b>2</b> Quiet device (no services)</li><li><b>1</b> Router / Gateway</li><li><b>1</b> Windows PC / Server</li><li><b>1</b> Printer</li><li><b>1</b> Camera / NVR</li><li><b>1</b> Web device</li><li><b>1</b> Database server</li></ul></div>
+  <div class="tile"><div class="muted">Issues</div>
+    <div><span class="sev" style="background:#c62828">high</span> 2</div>
+    <div><span class="sev" style="background:#e07b00">medium</span> 3</div>
+    <div><span class="sev" style="background:#2f6fb5">low</span> 8</div></div>
+</div>
+
+<h2>What needs fixing</h2>
+<div class='finding' style='border-left-color:#c62828'><div><span class='sev' style='background:#c62828'>high</span> <b>Telnet is open</b> <span class='muted'>on 192.168.1.35, port 23</span></div><p>Telnet sends passwords in plain text that anyone on the network can read.</p><p><b>Fix:</b> Turn Telnet off and use SSH (or the device&#x27;s HTTPS admin page) instead.</p></div>
+<div class='finding' style='border-left-color:#c62828'><div><span class='sev' style='background:#c62828'>high</span> <b>IP address conflict</b> <span class='muted'>on 192.168.1.40</span></div><p>Two different devices are using the address 192.168.1.40 (hardware aa:bb:cc:00:00:40 and aa:bb:cc:00:00:41). They keep knocking each other off the network, which looks like random disconnects or &#x27;no internet&#x27; on both devices.</p><p><b>Fix:</b> Give one device a different address, or set both to get their address automatically (DHCP). Check that the router&#x27;s DHCP range does not overlap any fixed/static addresses you have set by hand.</p></div>
+<div class='finding' style='border-left-color:#e07b00'><div><span class='sev' style='background:#e07b00'>medium</span> <b>Remote Desktop (RDP) is open</b> <span class='muted'>on 192.168.1.10, port 3389</span></div><p>RDP is a frequent target for password-guessing and ransomware.</p><p><b>Fix:</b> Allow RDP only from trusted machines or over a VPN, enable Network Level Authentication, and use strong passwords.</p></div>
+<div class='finding' style='border-left-color:#e07b00'><div><span class='sev' style='background:#e07b00'>medium</span> <b>FTP is open</b> <span class='muted'>on 192.168.1.35, port 21</span></div><p>FTP sends usernames, passwords and files unencrypted.</p><p><b>Fix:</b> Disable FTP or replace it with SFTP/FTPS.</p></div>
+<div class='finding' style='border-left-color:#e07b00'><div><span class='sev' style='background:#e07b00'>medium</span> <b>MySQL/MariaDB is reachable from the network</b> <span class='muted'>on 192.168.1.40, port 3306</span></div><p>Databases should only accept connections from the servers that need them.</p><p><b>Fix:</b> Bind the database to localhost or firewall it to the application servers.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>NetBIOS is open</b> <span class='muted'>on 192.168.1.10, port 139</span></div><p>Legacy Windows networking that leaks computer and user names.</p><p><b>Fix:</b> Disable NetBIOS over TCP/IP if nothing on the network needs it.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>Windows file sharing (SMB) is open</b> <span class='muted'>on 192.168.1.10, port 445</span></div><p>Normal for file sharing, but old SMB versions have serious flaws (e.g. WannaCry).</p><p><b>Fix:</b> Keep Windows updated, disable SMBv1, and share only the folders that are needed.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>Web admin page without HTTPS</b> <span class='muted'>on 192.168.1.20, port 80</span></div><p>Logging in to this device&#x27;s web page sends the password unencrypted.</p><p><b>Fix:</b> Enable HTTPS on the device if it supports it, and change any default password.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>Raw printing port is open</b> <span class='muted'>on 192.168.1.20, port 9100</span></div><p>Anyone on the network can send jobs straight to the printer, bypassing any print server.</p><p><b>Fix:</b> Restrict printer access to the print server or trusted subnets if possible.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>Web admin page without HTTPS</b> <span class='muted'>on 192.168.1.30, port 80</span></div><p>Logging in to this device&#x27;s web page sends the password unencrypted.</p><p><b>Fix:</b> Enable HTTPS on the device if it supports it, and change any default password.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>Camera video stream (RTSP) is open</b> <span class='muted'>on 192.168.1.30, port 554</span></div><p>Camera streams often use default passwords.</p><p><b>Fix:</b> Change the camera&#x27;s default password and keep its firmware updated.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>Web admin page without HTTPS</b> <span class='muted'>on 192.168.1.35, port 80</span></div><p>Logging in to this device&#x27;s web page sends the password unencrypted.</p><p><b>Fix:</b> Enable HTTPS on the device if it supports it, and change any default password.</p></div>
+<div class='finding' style='border-left-color:#2f6fb5'><div><span class='sev' style='background:#2f6fb5'>low</span> <b>Web admin page without HTTPS</b> <span class='muted'>on 192.168.1.40, port 8080</span></div><p>Logging in to this device&#x27;s web page sends the password unencrypted.</p><p><b>Fix:</b> Enable HTTPS on the device if it supports it, and change any default password.</p></div>
+
+<h2>All devices</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Device</th><th>Type</th><th>Open ports</th><th>Issues</th></tr></thead>
+<tbody><tr><td><b>192.168.1.1</b><div class='muted'>gateway.local</div><div class='muted mono'>aa:bb:cc:00:00:01</div></td><td>Router / Gateway<div class='muted'>It is the network&#x27;s default gateway (.1)</div></td><td><span class="port">53<small>dns</small></span> <span class="port">80<small>http</small></span> <span class="port">443<small>https</small></span></td><td><span class="ok">OK</span></td></tr>
+<tr><td><b>192.168.1.10</b><div class='muted'>RECEPTION-PC</div><div class='muted mono'>aa:bb:cc:00:00:0a</div></td><td>Windows PC / Server<div class='muted'>Open ports 135, 139, 445, 3389</div></td><td><span class="port">135<small>msrpc</small></span> <span class="port">139<small>netbios</small></span> <span class="port">445<small>smb</small></span> <span class="port">3389<small>rdp</small></span></td><td><span class="sev" style="background:#e07b00">medium</span> <span class="sev" style="background:#2f6fb5">low</span> <span class="sev" style="background:#2f6fb5">low</span></td></tr>
+<tr><td><b>192.168.1.20</b><div class='muted'></div><div class='muted mono'>aa:bb:cc:00:00:14</div></td><td>Printer<div class='muted'>Identifies itself as &#x27;laserjet&#x27;</div></td><td><span class="port">80<small>http</small></span> <span class="port">515<small>lpd</small></span> <span class="port">631<small>ipp</small></span> <span class="port">9100<small>jetdirect</small></span></td><td><span class="sev" style="background:#2f6fb5">low</span> <span class="sev" style="background:#2f6fb5">low</span></td></tr>
+<tr><td><b>192.168.1.30</b><div class='muted'></div><div class='muted mono'>aa:bb:cc:00:00:1e</div></td><td>Camera / NVR<div class='muted'>Identifies itself as &#x27;hikvision&#x27;</div></td><td><span class="port">80<small>http</small></span> <span class="port">554<small>rtsp</small></span></td><td><span class="sev" style="background:#2f6fb5">low</span> <span class="sev" style="background:#2f6fb5">low</span></td></tr>
+<tr><td><b>192.168.1.35</b><div class='muted'></div><div class='muted mono'>aa:bb:cc:00:00:23</div></td><td>Web device<div class='muted'>Open web ports 80</div></td><td><span class="port">21<small>ftp</small></span> <span class="port">23<small>telnet</small></span> <span class="port">80<small>http</small></span></td><td><span class="sev" style="background:#c62828">high</span> <span class="sev" style="background:#e07b00">medium</span> <span class="sev" style="background:#2f6fb5">low</span></td></tr>
+<tr><td><b>192.168.1.40</b><div class='muted'>pos-server</div><div class='muted mono'>aa:bb:cc:00:00:40</div></td><td>Database server<div class='muted'>Open ports 3306</div></td><td><span class="port">3306<small>mysql</small></span> <span class="port">8080<small>http-proxy</small></span></td><td><span class="sev" style="background:#c62828">high</span> <span class="sev" style="background:#e07b00">medium</span> <span class="sev" style="background:#2f6fb5">low</span></td></tr>
+<tr><td><b>192.168.1.50</b> <span class="me">this computer</span><div class='muted'>IT-LAPTOP</div><div class='muted mono'>aa:bb:cc:00:00:32</div></td><td>Quiet device (no services)<div class='muted'>Answers on the network but offers no services on the checked ports, which is good for security. Usually a phone, tablet, smart TV, games console or laptop</div></td><td><span class="muted">none</span></td><td><span class="ok">OK</span></td></tr>
+<tr><td><b>192.168.1.70</b><div class='muted'>omars-iphone</div><div class='muted mono'>aa:bb:cc:00:00:46</div></td><td>Quiet device (no services)<div class='muted'>Answers on the network but offers no services on the checked ports, which is good for security. Usually a phone, tablet, smart TV, games console or laptop</div></td><td><span class="muted">none</span></td><td><span class="ok">OK</span></td></tr></tbody></table></div>
+
+<footer>Generated by LAN Auditor 1.0.0. Checks common ports only; a clean result does not prove a
+device is secure. Only scan networks you own or have permission to test.</footer>
+</main></body></html>

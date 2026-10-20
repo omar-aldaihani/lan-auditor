@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lan-auditor"
+version = "1.0.0"
+description = "Find every device on a local network and flag security risks in plain English, with an HTML report."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Omar Aldaihani" }]
+keywords = ["network", "scanner", "security", "audit", "it-support"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: System :: Networking :: Monitoring",
+  "Topic :: Security",
+]
+
+[project.urls]
+Homepage = "https://github.com/omar-aldaihani/lan-auditor"
+
+[project.scripts]
+lanaudit = "lanaudit.cli:main"
+
+[tool.setuptools]
+packages = ["lanaudit"]
