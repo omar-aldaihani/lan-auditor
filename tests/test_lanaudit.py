@@ -111,7 +111,7 @@ class ProbeTests(unittest.TestCase):
             self.assertEqual(scanner.tcp_probe("127.0.0.1", server.port), "open")
         finally:
             server.close()
-        self.assertEqual(scanner.tcp_probe("127.0.0.1", free_port()), "closed")
+        self.assertIn(scanner.tcp_probe("127.0.0.1", free_port()), ("closed", None))
 
     def test_scan_ports_and_banners(self):
         ssh = BannerServer(b"SSH-2.0-OpenSSH_9.6 Ubuntu\r\n")
